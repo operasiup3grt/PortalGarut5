@@ -35,7 +35,9 @@
     (function () {
       var bingkai = document.querySelector('iframe'), q = new URLSearchParams(location.search), teruskan = [];
       if (q.get('ke') === 'monalisa') teruskan.push('ke=monalisa');
-      if (q.get('keluar') === '1') { teruskan.push('keluar=1'); history.replaceState(null, '', location.pathname); } // tanda keluar dipakai sekali
+      if (q.get('keluar') === '1') { // tanda keluar dipakai sekali, tanda Monalisa tetap
+        teruskan.push('keluar=1'); history.replaceState(null, '', location.pathname + (q.get('ke') === 'monalisa' ? '?ke=monalisa' : ''));
+      }
       if (teruskan.length && bingkai) bingkai.src = bingkai.src.split('?')[0] + '?' + teruskan.join('&');
       window.addEventListener('message', function (e) {
         // Hanya terima pesan dari Apps Script portal (domain googleusercontent milik Google)
