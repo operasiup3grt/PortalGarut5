@@ -44,7 +44,7 @@
         if (!/^https:\/\/[a-z0-9-]+\.googleusercontent\.com$/.test(e.origin)) return;
         var d = e.data;
         if (!d || d.type !== 'pg5-monalisa' || typeof d.url !== 'string') return;
-        if (d.url.indexOf('https://monalisa.portalgarut5.web.id/masuk?t=') !== 0) return;
+        if (d.url.indexOf('https://monalisa.garut5.com/masuk?t=') !== 0) return;
         location.href = d.url;
       });
     })();
