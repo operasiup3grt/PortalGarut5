@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -30,5 +29,23 @@
     src="https://script.google.com/macros/s/AKfycbzlr4Tm0hgokj0Zc4bMrF-QceKoUqfybdnBPy6NdMhHYEnxx-1kk_CaW-JN3aHaSuEX/exec"
     allow="clipboard-write; fullscreen">
   </iframe>
+
+  <!-- MASUK KE MONALISA: teruskan ?ke=monalisa ke Apps Script, lalu pindahkan tab ke Monalisa setelah login -->
+  <script>
+    (function () {
+      var bingkai = document.querySelector('iframe');
+      if (new URLSearchParams(location.search).get('ke') === 'monalisa' && bingkai) {
+        bingkai.src = bingkai.src.split('?')[0] + '?ke=monalisa';
+      }
+      window.addEventListener('message', function (e) {
+        // Hanya terima pesan dari Apps Script portal (domain googleusercontent milik Google)
+        if (!/^https:\/\/[a-z0-9-]+\.googleusercontent\.com$/.test(e.origin)) return;
+        var d = e.data;
+        if (!d || d.type !== 'pg5-monalisa' || typeof d.url !== 'string') return;
+        if (d.url.indexOf('https://monalisa.portalgarut5.web.id/masuk?t=') !== 0) return;
+        location.href = d.url;
+      });
+    })();
+  </script>
 </body>
 </html>
